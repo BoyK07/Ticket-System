@@ -23,7 +23,7 @@ class EventFactory extends Factory
             'location' => $this->faker->address,
             'description' => $this->faker->paragraph,
             'price' => $this->faker->randomFloat(2, 10, 500), 
-            'image' => 'https://picsum.photos/seed/picsum/1920/1080',
+            'image' => 'https://picsum.photos/seed/'.$this->faker->name.'/1920/1080',
             'created_at' => now(),
             'updated_at' => now()
         ];
