@@ -16,7 +16,7 @@
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 @if (Auth::user() != null)
                     @if (Auth::user()->isAdmin)
-                        <x-nav-link class="mr-4" :href="route('home')" :active="request()->routeIs('home')">
+                        <x-nav-link class="mr-4" :href="route('admin.events.index')" :active="request()->routeIs('admin.events.index')">
                             {{ __('Evenementen') }}
                         </x-nav-link>
                         <x-nav-link class="mr-4" :href="route('home')" :active="request()->routeIs('home')">
@@ -107,6 +107,20 @@
                 <i class="fa-solid fa-house mr-2"></i>
                 {{ __('Home') }}
             </x-responsive-nav-link>
+            @if (Auth::user()->isAdmin)
+                <x-responsive-nav-link :href="route('admin.events.index')" :active="request()->routeIs('admin.events.index')">
+                    <i class="fa-solid fa-house mr-2"></i>
+                    {{ __('Evenementen') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                    <i class="fa-solid fa-house mr-2"></i>
+                    {{ __('Gebruikers') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                    <i class="fa-solid fa-house mr-2"></i>
+                    {{ __('Reserveringen') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

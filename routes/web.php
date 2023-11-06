@@ -3,7 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminEvenementenController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,14 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'show'])->name('admin.index');
+
+    // Admin - Evenementen
+    Route::get('/admin/evenementen', [AdminEvenementenController::class, 'show'])->name('admin.events.index');
+    Route::get('/admin/evenementen/create', [AdminEvenementenController::class, 'create'])->name('admin.events.create');
+    Route::post('/admin/evenementen/create', [AdminEvenementenController::class, 'store'])->name('admin.events.store');
+    Route::get('/admin/evenementen/edit/{event}', [AdminEvenementenController::class, 'edit'])->name('admin.events.edit');
+    Route::post('/admin/evenementen/edit/{event}', [AdminEvenementenController::class, 'update'])->name('admin.events.update');
+    Route::get('/admin/evenementen/delete/{event}', [AdminEvenementenController::class, 'delete'])->name('admin.events.delete');
 });
 
 require __DIR__.'/auth.php';
