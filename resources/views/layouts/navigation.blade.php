@@ -15,6 +15,20 @@
             <!-- Account Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 @if (Auth::user() != null)
+                    @if (Auth::user()->isAdmin)
+                        <x-nav-link class="mr-4" :href="route('home')" :active="request()->routeIs('home')">
+                            {{ __('Evenementen') }}
+                        </x-nav-link>
+                        <x-nav-link class="mr-4" :href="route('home')" :active="request()->routeIs('home')">
+                            {{ __('Gebruikers') }}
+                        </x-nav-link>
+                        <x-nav-link class="mr-4" :href="route('home')" :active="request()->routeIs('home')">
+                            {{ __('Reserveringen') }}
+                        </x-nav-link>
+                        <x-nav-link class="mr-4" :href="route('admin.index')" :active="request()->routeIs('admin.index')">
+                            {{ __('Admin Dashboard') }}
+                        </x-nav-link>
+                    @endif
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             @if (Auth::user()->isAdmin)
@@ -97,8 +111,12 @@
 
         <!-- Responsive Settings Options -->
         <div class="pb-1 border-t border-gray-200 dark:border-gray-600">
-
             @if (Auth::user() != null)
+                @if (Auth::user()->isAdmin)
+                    <x-responsive-nav-link :href="route('admin.index')">
+                        {{ __('Admin') }}
+                    </x-responsive-nav-link>
+                @endif
                 <div class="mt-2 space-y-1">
                     <x-responsive-nav-link :href="route('profile.edit')">
                         {{ __('Profile') }}
