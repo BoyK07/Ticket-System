@@ -107,7 +107,8 @@
                 <i class="fa-solid fa-house mr-2"></i>
                 {{ __('Home') }}
             </x-responsive-nav-link>
-            @if (Auth::user()->isAdmin)
+            @if (Auth::user() != null)
+                @if (Auth::user()->isAdmin)
                 <x-responsive-nav-link :href="route('admin.events.index')" :active="request()->routeIs('admin.events.index')">
                     <i class="fa-solid fa-house mr-2"></i>
                     {{ __('Evenementen') }}
@@ -120,6 +121,7 @@
                     <i class="fa-solid fa-house mr-2"></i>
                     {{ __('Reserveringen') }}
                 </x-responsive-nav-link>
+                @endif
             @endif
         </div>
 
