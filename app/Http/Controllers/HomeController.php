@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function show()
     {
-        $events = Event::all();
+        $events = Event::where('date', '>', now())->orderBy('date')->get();
         return view('home', ['events' => $events]);
     }
 }

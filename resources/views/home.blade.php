@@ -4,7 +4,6 @@
             <div class="p-6 text-gray-900 dark:text-gray-100 flex justify-center">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6">
                     @foreach ($events as $event)
-                    @if ($event->date >= now()->toDateString())
                         <a href="{{ route('event.show', $event->id) }}" class="relative bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg border-2 border-white block mb-6 pb-8">
                             <div class="p-6 text-gray-900 dark:text-gray-100">
                                 <img src="{{ $event->image }}" alt="{{ $event->title }}" class="rounded-md shadow-lg imageHover">
@@ -22,7 +21,6 @@
                                 <span>{{ date('H:i', strtotime($event->time)) }}</span>
                             </div>
                         </a>
-                    @endif
                     @endforeach
                 </div>
             </div>
