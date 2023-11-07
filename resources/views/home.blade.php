@@ -10,7 +10,7 @@
                                 <img src="{{ $event->image }}" alt="{{ $event->title }}" class="rounded-md shadow-lg imageHover">
                                 <div class="mt-4">
                                     <h2 class="text-lg font-bold">{{ $event->title }}</h2>
-                                    <p class="text-sm">{{ Str::limit($event->description, 150) }}</p>
+                                    <p class="text-sm">{!! Str::limit(html_entity_decode(strip_tags($event->description, '<b><i><strong><em>')), 150) !!}</p>
                                     <p class="text-xs mt-2 flex items-center">
                                         <i class="fas fa-map-marker-alt mr-2"></i>
                                         {{ $event->location }}
