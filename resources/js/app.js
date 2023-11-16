@@ -122,11 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         eventCards.forEach(card => {
             const title = card.querySelector('.event-title').textContent.toLowerCase();
-            if (title.includes(searchText)) {
-                card.style.display = '';
-            } else {
-                card.style.display = 'none';
-            }
+            card.classList.toggle('hidden', !title.includes(searchText));
         });
     });
 });
