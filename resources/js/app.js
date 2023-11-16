@@ -55,3 +55,44 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.reset-scan-button');
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            const reservationId = this.getAttribute('data-reservation-id');
+            resetScan(reservationId);
+        });
+    });
+});
+
+function resetScan(reservationId) {
+    fetch(`/admin/reservations/${reservationId}/reset-scan`, { // Corrected to use reservationId
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({
+            reservation_id: reservationId
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        const button = document.querySelector(`.reset-scan-button[data-reservation-id="${reservationId}"]`);
+            button.classList.remove('bg-blue-500');
+            button.classList.add('bg-green-500');
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {
+            console.log(data.success)
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}

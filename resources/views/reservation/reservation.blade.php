@@ -2,7 +2,11 @@
     <div class="p-5">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900 dark:text-gray-100 flex justify-center">
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6">
+                <div class="flex flex-col absolute p-6 dark:text-white font-bold">
+                    <span class="font-2xl">Reservering nummer: #{{$reservation->id}}</span>
+                    <span class="font-2xl">Totaalbedrag: &euro;{{$reservation->tickets->count() * $reservation->event->price}}</span>
+                </div>
+                <div class="mt-24 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6">
                     @foreach ($reservation->tickets as $ticket)
                         <div class="relative border-white border-2 rounded-md shadow-lg">
                             <div class="absolute inset-0 bg-black bg-opacity-50 rounded-md"></div>

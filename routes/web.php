@@ -1,12 +1,15 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ReservationController;
+
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminEvenementenController;
-use App\Http\Controllers\ReservationController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +46,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/evenementen/edit/{event}', [AdminEvenementenController::class, 'edit'])->name('admin.events.edit');
     Route::post('/admin/evenementen/edit/{event}', [AdminEvenementenController::class, 'update'])->name('admin.events.update');
     Route::get('/admin/evenementen/delete/{event}', [AdminEvenementenController::class, 'delete'])->name('admin.events.delete');
+
+    // Admin - Reserveringen
+    Route::get('/admin/reservations', [AdminReservationController::class, 'show'])->name('admin.reservations.index');
+    Route::post('/admin/reservations/{reservation}/delete', [AdminReservationController::class, 'delete'])->name('admin.reservations.delete');
+    Route::post('/admin/reservations/{reservation}/reset-scan', [AdminReservationController::class, 'resetScan'])->name('admin.reservations.reset-scan');
+
 });
 
 require __DIR__.'/auth.php';

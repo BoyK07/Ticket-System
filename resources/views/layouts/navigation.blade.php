@@ -27,7 +27,7 @@
                         <x-nav-link class="mr-4" :href="route('home')" :active="request()->routeIs('home')">
                             {{ __('Gebruikers') }}
                         </x-nav-link>
-                        <x-nav-link class="mr-4" :href="route('home')" :active="request()->routeIs('home')">
+                        <x-nav-link class="mr-4" :href="route('admin.reservations.index')" :active="request()->routeIs('admin.reservations.index')">
                             {{ __('Reserveringen') }}
                         </x-nav-link>
                         <x-nav-link class="mr-4" :href="route('admin.index')" :active="request()->routeIs('admin.index')">
@@ -125,7 +125,7 @@
                     <i class="fa-solid fa-house mr-2"></i>
                     {{ __('Gebruikers') }}
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                <x-responsive-nav-link :href="route('admin.reservations.index')" :active="request()->routeIs('admin.reservations.index')">
                     <i class="fa-solid fa-house mr-2"></i>
                     {{ __('Reserveringen') }}
                 </x-responsive-nav-link>

@@ -62,7 +62,7 @@ class ReservationController extends Controller
 
     public function show(Reservation $reservation)
     {
-        if ($reservation->user_id !== Auth::id()) {
+        if ($reservation->user_id !== Auth::id() && !Auth::user()->isAdmin) {
             return redirect()->route('home')->with('error', 'You are not allowed to view this reservation.');
         }
 
