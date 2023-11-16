@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminEvenementenController;
+use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +21,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'show'])->name('home');
 
-Route::get('/event/{id}', [EventController::class, 'show'])->name('event.show');
+Route::get('/event/{event}', [EventController::class, 'show'])->name('event.show');
+Route::post('/checkout', [ReservationController::class, 'checkout'])->name('tickets.purchase');
+Route::get('/reservation/{reservation}', [ReservationController::class, 'show'])->name('reservation.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

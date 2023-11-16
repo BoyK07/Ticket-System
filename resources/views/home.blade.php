@@ -1,8 +1,15 @@
 <x-app-layout>
     <div class="p-5">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            @if(session('error'))
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <strong class="font-bold">Error!</strong>
+                    <span class="block sm:inline">{{ session('error') }}</span>
+                </div>
+            @endif
             <div class="p-6 text-gray-900 dark:text-gray-100 flex justify-center">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6">
+
                     @foreach ($events as $event)
                         <a href="{{ route('event.show', $event->id) }}" class="relative bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg border-2 border-white block mb-6 pb-8">
                             <div class="p-6 text-gray-900 dark:text-gray-100">
