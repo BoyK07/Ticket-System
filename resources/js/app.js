@@ -29,3 +29,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('[data-reservation-type]');
+    const futureReservations = document.getElementById('future-reservations');
+    const historicalReservations = document.getElementById('historical-reservations');
+    const expiredReservations = document.getElementById('expired-reservations');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            const type = button.getAttribute('data-reservation-type');
+            // Hide all sections
+            futureReservations.classList.add('hidden');
+            historicalReservations.classList.add('hidden');
+            expiredReservations.classList.add('hidden');
+
+            // Show the selected section
+            if (type === 'future') {
+                futureReservations.classList.remove('hidden');
+            } else if (type === 'historical') {
+                historicalReservations.classList.remove('hidden');
+            } else if (type === 'expired') {
+                expiredReservations.classList.remove('hidden');
+            }
+        });
+    });
+});

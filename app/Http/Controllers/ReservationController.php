@@ -9,13 +9,64 @@ use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
+    public function index()
+    {
+        // Historical reservations: events before today and tickets are scanned
+        $historicalReservations = Reservation::where('user_id', Auth::id())
+            ->whereHas('event', function ($query) {
+                $query->where('date', '<', now());
+            })
+            ->whereHas('tickets', function ($query) {
+                $query->where('gescand', true);
+            })
+            ->with([
+                'event' => function ($query) {
+                    $query->orderBy('date', 'desc');
+                }
+            ])
+            ->get();
+
+        // Expired reservations: events before today and tickets are not scanned
+        $expiredReservations = Reservation::where('user_id', Auth::id())
+            ->whereHas('event', function ($query) {
+                $query->where('date', '<', now());
+            })
+            ->whereDoesntHave('tickets', function ($query) {
+                $query->where('gescand', true);
+            })
+            ->with([
+                'event' => function ($query) {
+                    $query->orderBy('date', 'desc');
+                }
+            ])
+            ->get();
+
+        // Future reservations: events after today
+        $futureReservations = Reservation::where('user_id', Auth::id())
+            ->whereHas('event', function ($query) {
+                $query->where('date', '>', now());
+            })
+            ->with([
+                'event' => function ($query) {
+                    $query->orderBy('date', 'desc');
+                }
+            ])
+            ->get();
+
+        return view('reservation.all', [
+            'historical' => $historicalReservations,
+            'expired' => $expiredReservations,
+            'future' => $futureReservations,
+        ]);
+    }
+
     public function show(Reservation $reservation)
     {
         if ($reservation->user_id !== Auth::id()) {
             return redirect()->route('home')->with('error', 'You are not allowed to view this reservation.');
         }
 
-        return view('reservation.index', [
+        return view('reservation.reservation', [
             'reservation' => $reservation
         ]);
     }
@@ -41,7 +92,6 @@ class ReservationController extends Controller
             $ticket->save();
         }
 
-        // Redirect with success message
-        return redirect()->route('reservation.show', $reservation);
+        return redirect()->route('reservation.reservation', $reservation);
     }
 }

@@ -23,6 +23,8 @@ Route::get('/', [HomeController::class, 'show'])->name('home');
 
 Route::get('/event/{event}', [EventController::class, 'show'])->name('event.show');
 Route::post('/checkout', [ReservationController::class, 'checkout'])->name('tickets.purchase');
+
+Route::get('/reservations', [ReservationController::class, 'index'])->name('reservation.all');
 Route::get('/reservation/{reservation}', [ReservationController::class, 'show'])->name('reservation.show');
 
 Route::middleware('auth')->group(function () {

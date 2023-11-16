@@ -9,6 +9,11 @@
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Home') }}
                     </x-nav-link>
+                    @if (Auth::user() != null)
+                    <x-nav-link :href="route('reservation.all')" :active="request()->routeIs('reservation.all')">
+                        {{ __('Reserveringen') }}
+                    </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -108,6 +113,9 @@
                 {{ __('Home') }}
             </x-responsive-nav-link>
             @if (Auth::user() != null)
+            <x-responsive-nav-link :href="route('reservation.all')" :active="request()->routeIs('reservation.all')">
+                {{ __('Reserveringen') }}
+            </x-responsive-nav-link>
                 @if (Auth::user()->isAdmin)
                 <x-responsive-nav-link :href="route('admin.events.index')" :active="request()->routeIs('admin.events.index')">
                     <i class="fa-solid fa-house mr-2"></i>
