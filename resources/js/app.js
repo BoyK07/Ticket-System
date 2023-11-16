@@ -10,6 +10,10 @@ Alpine.start();
 //        OWN CODE
 /////////////////////////////////////////////////////////////////
 
+////////////////////////////////
+//  Event card
+////////////////////////////////
+
 document.addEventListener('DOMContentLoaded', () => {
     const ticketCountEl = document.getElementById('ticketCount');
     const totalPriceEl = document.getElementById('totalPrice');
@@ -29,6 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+
+//////////////////////
+// Reservation type selector
+//////////////////////
 
 document.addEventListener('DOMContentLoaded', () => {
     const buttons = document.querySelectorAll('[data-reservation-type]');
@@ -56,6 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+//////////////////////
+// Reset gescand button
+//////////////////////
 
 document.addEventListener('DOMContentLoaded', () => {
     const buttons = document.querySelectorAll('.reset-scan-button');
@@ -96,3 +108,25 @@ function resetScan(reservationId) {
         console.error('Error:', error);
     });
 }
+
+////////////////////////
+// Search bar
+////////////////////////
+
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('eventSearch');
+    const eventCards = document.querySelectorAll('.event-card');
+
+    searchInput.addEventListener('input', () => {
+        const searchText = searchInput.value.toLowerCase();
+
+        eventCards.forEach(card => {
+            const title = card.querySelector('.event-title').textContent.toLowerCase();
+            if (title.includes(searchText)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+});

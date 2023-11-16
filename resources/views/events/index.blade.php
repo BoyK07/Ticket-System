@@ -19,7 +19,7 @@
                     </div>
                     
                     <!-- Right Side -->
-                    <div class="right-side mb-6 pb-8 col-span-1 flex justify-end">
+                    <div class="right-side mb-6 pb-8 col-span-1 flex justify-end mr-20">
                         <div class="relative p-4">
                             <div class="w-auto">
                                 <div class="flex flex-col items-center mb-10">

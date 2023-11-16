@@ -7,15 +7,17 @@
                     <span class="block sm:inline">{{ session('error') }}</span>
                 </div>
             @endif
+            <div class="mb-4">
+                <input type="text" id="eventSearch" placeholder="Zoek naar events..." class="w-full border-2 border-gray-300 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none dark:bg-gray-800 dark:text-white">
+            </div>
             <div class="p-6 text-gray-900 dark:text-gray-100 flex justify-center">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6">
-
                     @foreach ($events as $event)
-                        <a href="{{ route('event.show', $event->id) }}" class="relative bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg border-2 border-white block mb-6 pb-8">
+                        <div class="event-card relative bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg border-2 border-white block mb-6 pb-8">
                             <div class="p-6 text-gray-900 dark:text-gray-100">
                                 <img src="{{ $event->image }}" alt="{{ $event->title }}" class="rounded-md shadow-lg imageHover">
                                 <div class="mt-4">
-                                    <h2 class="text-lg font-bold">{{ $event->title }}</h2>
+                                    <h2 class="event-title text-lg font-bold">{{ $event->title }}</h2>
                                     <p class="text-sm">{!! Str::limit(html_entity_decode(strip_tags($event->description, '<b><i><strong><em>')), 150) !!}</p>
                                     <p class="text-xs mt-2 flex items-center">
                                         <i class="fas fa-map-marker-alt mr-2"></i>
@@ -27,7 +29,7 @@
                                 <span>{{ date('d M Y', strtotime($event->date)) }}</span>
                                 <span>{{ date('H:i', strtotime($event->time)) }}</span>
                             </div>
-                        </a>
+                        </div>
                     @endforeach
                 </div>
             </div>
