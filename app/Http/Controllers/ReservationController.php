@@ -92,6 +92,6 @@ class ReservationController extends Controller
             $ticket->save();
         }
 
-        return redirect()->route('reservation.reservation', $reservation);
+        return redirect()->route('reservation.show', $reservation);
     }
 }

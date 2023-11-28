@@ -23,7 +23,7 @@
                     </thead>
                     <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200">
                         @foreach($reservations as $reservation)
-                            <tr class="hover:bg-gray-700">      
+                            <tr class="hover:bg-gray-700">
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->user->name }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <a href="{{route('reservation.show', $reservation)}}">
@@ -33,7 +33,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap">{{ date('d M Y', strtotime($reservation->event->date)) }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ date('H:i', strtotime($reservation->event->time)) }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->event->location }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ ($reservation->tickets->count()) * ($reservation->event->price) }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">&euro; {{ ($reservation->tickets->count()) * ($reservation->event->price) }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <button class="reset-scan-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" data-reservation-id="{{ $reservation->id }}">Reset Scan</button>
                                 </td>

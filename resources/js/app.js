@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const updatePrice = () => {
         const totalPrice = (parseInt(ticketCountEl.value) * ticketPrice).toFixed(2);
-        totalPriceEl.textContent = `$${totalPrice}`;
+        totalPriceEl.textContent =`€ ${totalPrice}`;
     };
 
     document.querySelectorAll('[data-action="increment"], [data-action="decrement"]').forEach(button => {
